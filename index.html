@@ -38,14 +38,6 @@
       overflow-y: auto;
     }
 
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
   </style>
 </head>
 <body>
@@ -67,6 +59,7 @@
     <a href="#casino14" onclick="loadCasinoPage(14)">Казино 14</a>
     <a href="#casino15" onclick="loadCasinoPage(15)">Казино 15</a>
     <a href="#casino16" onclick="loadCasinoPage(16)">Казино 16</a>
+    <a href="#casino17" onclick="loadCasinoPage(17)">Казино 17</a>
   </nav>
 
   <main class="content" id="content">
@@ -74,20 +67,22 @@
   </main>
 
   <script>
+    // Функция для загрузки контента для каждого казино
     function loadCasinoPage(casinoNumber) {
       const content = document.getElementById('content');
-      content.innerHTML = `Страница Казино ${casinoNumber}`;
+      content.innerHTML = `Страница Казино ${casinoNumber}`;  // Здесь будет ваш контент для соответствующего казино
 
       // Изменяем URL без перезагрузки страницы
       history.pushState({ casino: casinoNumber }, `Казино ${casinoNumber}`, `#casino${casinoNumber}`);
     }
 
-    // Загружать правильный контент в зависимости от URL
+    // Загружать правильный контент в зависимости от URL при изменении хеша
     window.addEventListener('popstate', function() {
       const casinoNumber = window.location.hash.replace('#casino', ''); // Извлекаем номер казино из URL
       loadCasinoPage(casinoNumber);
     });
 
+    // Загрузка контента при первой загрузке страницы
     window.onload = function() {
       const hash = window.location.hash;
       if (hash) {
@@ -98,5 +93,6 @@
       }
     }
   </script>
+
 </body>
 </html>
