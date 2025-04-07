@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Казино Меню</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #222;
+      color: #fff;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      padding: 10px;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
+    }
+
+    .sidebar a:hover {
+      background: #444;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="#casino1" onclick="loadCasinoPage(1)">Казино 1</a>
+    <a href="#casino2" onclick="loadCasinoPage(2)">Казино 2</a>
+    <a href="#casino3" onclick="loadCasinoPage(3)">Казино 3</a>
+    <a href="#casino4" onclick="loadCasinoPage(4)">Казино 4</a>
+    <a href="#casino5" onclick="loadCasinoPage(5)">Казино 5</a>
+    <a href="#casino6" onclick="loadCasinoPage(6)">Казино 6</a>
+    <a href="#casino7" onclick="loadCasinoPage(7)">Казино 7</a>
+    <a href="#casino8" onclick="loadCasinoPage(8)">Казино 8</a>
+    <a href="#casino9" onclick="loadCasinoPage(9)">Казино 9</a>
+    <a href="#casino10" onclick="loadCasinoPage(10)">Казино 10</a>
+    <a href="#casino11" onclick="loadCasinoPage(11)">Казино 11</a>
+    <a href="#casino12" onclick="loadCasinoPage(12)">Казино 12</a>
+    <a href="#casino13" onclick="loadCasinoPage(13)">Казино 13</a>
+    <a href="#casino14" onclick="loadCasinoPage(14)">Казино 14</a>
+    <a href="#casino15" onclick="loadCasinoPage(15)">Казино 15</a>
+    <a href="#casino16" onclick="loadCasinoPage(16)">Казино 16</a>
+  </nav>
+
+  <main class="content" id="content">
+    <!-- Здесь будет отображаться контент казино -->
+  </main>
+
+  <script>
+    function loadCasinoPage(casinoNumber) {
+      const content = document.getElementById('content');
+      content.innerHTML = `Страница Казино ${casinoNumber}`;
+
+      // Изменяем URL без перезагрузки страницы
+      history.pushState({ casino: casinoNumber }, `Казино ${casinoNumber}`, `#casino${casinoNumber}`);
+    }
+
+    // Загружать правильный контент в зависимости от URL
+    window.addEventListener('popstate', function() {
+      const casinoNumber = window.location.hash.replace('#casino', ''); // Извлекаем номер казино из URL
+      loadCasinoPage(casinoNumber);
+    });
+
+    window.onload = function() {
+      const hash = window.location.hash;
+      if (hash) {
+        const casinoNumber = hash.replace('#casino', '');
+        loadCasinoPage(casinoNumber);
+      } else {
+        loadCasinoPage(1); // Загрузить первую страницу по умолчанию
+      }
+    }
+  </script>
+</body>
+</html>
