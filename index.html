@@ -72,21 +72,21 @@
       const content = document.getElementById('content');
       content.innerHTML = `Страница Казино ${casinoNumber}`;  // Здесь будет ваш контент для соответствующего казино
 
-      // Изменяем URL без перезагрузки страницы
-      history.pushState({ casino: casinoNumber }, `Казино ${casinoNumber}`, `#casino${casinoNumber}`);
+      // Изменяем URL, добавляя .html
+      history.pushState({ casino: casinoNumber }, `Казино ${casinoNumber}`, `casino${casinoNumber}.html`);
     }
 
     // Загружать правильный контент в зависимости от URL при изменении хеша
     window.addEventListener('popstate', function() {
-      const casinoNumber = window.location.hash.replace('#casino', ''); // Извлекаем номер казино из URL
+      const casinoNumber = window.location.pathname.replace('/casino', '').replace('.html', ''); // Извлекаем номер казино из URL
       loadCasinoPage(casinoNumber);
     });
 
     // Загрузка контента при первой загрузке страницы
     window.onload = function() {
-      const hash = window.location.hash;
-      if (hash) {
-        const casinoNumber = hash.replace('#casino', '');
+      const path = window.location.pathname;  // Получаем текущий путь URL
+      if (path.includes('casino')) {
+        const casinoNumber = path.replace('/casino', '').replace('.html', '');
         loadCasinoPage(casinoNumber);
       } else {
         loadCasinoPage(1); // Загрузить первую страницу по умолчанию
