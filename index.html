@@ -51,22 +51,22 @@
 <body>
 
   <nav class="sidebar" id="sidebar">
-    <a href="#casino1" onclick="loadCasinoPage(1)">Казино 1</a>
-    <a href="#casino2" onclick="loadCasinoPage(2)">Казино 2</a>
-    <a href="#casino3" onclick="loadCasinoPage(3)">Казино 3</a>
-    <a href="#casino4" onclick="loadCasinoPage(4)">Казино 4</a>
-    <a href="#casino5" onclick="loadCasinoPage(5)">Казино 5</a>
-    <a href="#casino6" onclick="loadCasinoPage(6)">Казино 6</a>
-    <a href="#casino7" onclick="loadCasinoPage(7)">Казино 7</a>
-    <a href="#casino8" onclick="loadCasinoPage(8)">Казино 8</a>
-    <a href="#casino9" onclick="loadCasinoPage(9)">Казино 9</a>
-    <a href="#casino10" onclick="loadCasinoPage(10)">Казино 10</a>
-    <a href="#casino11" onclick="loadCasinoPage(11)">Казино 11</a>
-    <a href="#casino12" onclick="loadCasinoPage(12)">Казино 12</a>
-    <a href="#casino13" onclick="loadCasinoPage(13)">Казино 13</a>
-    <a href="#casino14" onclick="loadCasinoPage(14)">Казино 14</a>
-    <a href="#casino15" onclick="loadCasinoPage(15)">Казино 15</a>
-    <a href="#casino16" onclick="loadCasinoPage(16)">Казино 16</a>
+    <a href="/1" onclick="loadCasinoPage(1)">Казино 1</a>
+    <a href="/2" onclick="loadCasinoPage(2)">Казино 2</a>
+    <a href="/3" onclick="loadCasinoPage(3)">Казино 3</a>
+    <a href="/4" onclick="loadCasinoPage(4)">Казино 4</a>
+    <a href="/5" onclick="loadCasinoPage(5)">Казино 5</a>
+    <a href="/6" onclick="loadCasinoPage(6)">Казино 6</a>
+    <a href="/7" onclick="loadCasinoPage(7)">Казино 7</a>
+    <a href="/8" onclick="loadCasinoPage(8)">Казино 8</a>
+    <a href="/9" onclick="loadCasinoPage(9)">Казино 9</a>
+    <a href="/10" onclick="loadCasinoPage(10)">Казино 10</a>
+    <a href="/11" onclick="loadCasinoPage(11)">Казино 11</a>
+    <a href="/12" onclick="loadCasinoPage(12)">Казино 12</a>
+    <a href="/13" onclick="loadCasinoPage(13)">Казино 13</a>
+    <a href="/14" onclick="loadCasinoPage(14)">Казино 14</a>
+    <a href="/15" onclick="loadCasinoPage(15)">Казино 15</a>
+    <a href="/16" onclick="loadCasinoPage(16)">Казино 16</a>
   </nav>
 
   <main class="content" id="content">
@@ -79,19 +79,19 @@
       content.innerHTML = `Страница Казино ${casinoNumber}`;
 
       // Изменяем URL без перезагрузки страницы
-      history.pushState({ casino: casinoNumber }, `Казино ${casinoNumber}`, `#casino${casinoNumber}`);
+      history.pushState({ casino: casinoNumber }, `Казино ${casinoNumber}`, `/${casinoNumber}`);
     }
 
     // Загружать правильный контент в зависимости от URL
     window.addEventListener('popstate', function() {
-      const casinoNumber = window.location.hash.replace('#casino', ''); // Извлекаем номер казино из URL
+      const casinoNumber = window.location.pathname.replace('/', ''); // Извлекаем номер казино из пути
       loadCasinoPage(casinoNumber);
     });
 
     window.onload = function() {
-      const hash = window.location.hash;
-      if (hash) {
-        const casinoNumber = hash.replace('#casino', '');
+      const pathname = window.location.pathname;
+      if (pathname !== '/') {
+        const casinoNumber = pathname.replace('/', '');
         loadCasinoPage(casinoNumber);
       } else {
         loadCasinoPage(1); // Загрузить первую страницу по умолчанию
@@ -100,3 +100,4 @@
   </script>
 </body>
 </html>
+
